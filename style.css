@@ -1,0 +1,50 @@
+.heading {
+  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.display {
+  padding: 15px;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+input {
+  width: 220px;
+  height: 50px;
+  text-align: end;
+}
+
+.calc {
+  width: 250px;
+  border: solid;
+  border-radius: 10px;
+}
+
+button {
+  width: 45px;
+  height: 40px;
+  padding: 15px;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttons {
+  padding: 15px;
+}
+
+.button-row {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.equal {
+  width: 105px;
+}

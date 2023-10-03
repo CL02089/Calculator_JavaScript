@@ -3,20 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Calculator</title>
   </head>
   <body>
-    <h1>Calculator</h1>
+    <div class="heading">
+      <h1>Calculator</h1>
+    </div>
     <div class="calc">
       <div class="display">
-        <input type="text" class="calc-display" readonly />
+        <input type="text" class="calc-display" placeholder="0" readonly />
       </div>
 
       <div class="buttons">
-
         <div class="button-row">
-          <button class="control-key" id="CE">CE</button></div>
-          <button class="control-key" id="C">C</button></div>
+          <button class="control-key" id="CE">CE</button>
+          <button class="control-key" id="C">C</button>
           <button class="operation" id="%">%</button>
           <button class="operation" id="/">/</button>
         </div>
@@ -27,7 +29,6 @@
           <button class="number" id="9">9</button>
           <button class="operation" id="x">X</button>
         </div>
-
 
         <div class="button-row">
           <button class="number" id="4">4</button>
@@ -43,12 +44,12 @@
           <button class="operation" id="+">+</button>
         </div>
 
-        <div class="button-row">  
+        <div class="button-row">
           <button class="number" id="0">0</button>
           <button class="decimal-point" id=".">.</button>
           <button class="equal" id="=">=</button>
         </div>
-        
+      </div>
     </div>
   </body>
 </html>
