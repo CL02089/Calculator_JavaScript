@@ -1,9 +1,15 @@
-"use strict";
+'use strict';
 
-const display = document.querySelector("input");
-const numberButtons = document.querySelector(".number");
-const operationButtons = document.querySelector(".operation");
-const calculator = document.querySelector(".calc");
+const display = document.querySelector('input');
+const buttons = document.querySelector('.buttons');
+const numberButtons = document.querySelector('.number');
+const operationButtons = document.querySelector('.operation');
+const calculator = document.querySelector('.calc');
+
+buttons.addEventListener('click', (e) => {
+  if (e.target.matches('button')) {
+  }
+});
 
 // Calculator logic
 // Pressing number gives input to the calculator
