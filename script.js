@@ -1,15 +1,56 @@
 'use strict';
 
 const display = document.querySelector('input');
-const buttons = document.querySelector('.buttons');
+const buttons = document.querySelectorAll('button');
 const numberButtons = document.querySelector('.number');
 const operationButtons = document.querySelector('.operation');
 const calculator = document.querySelector('.calc');
 
-buttons.addEventListener('click', (e) => {
-  if (e.target.matches('button')) {
+let firstNumber;
+let secondNumber;
+let operator;
+
+console.log(buttons);
+buttons.forEach((el) => el.addEventListener('click', function () {
+  firstNumber = 
+}));
+
+const add = function (a, b) {
+  return a + b;
+};
+
+const subtract = function (a, b) {
+  return a - b;
+};
+
+const multiply = function (a, b) {
+  return a * b;
+};
+
+const divide = function (a, b) {
+  if (b === 0) return `You can't divide by 0!`;
+  else return a / b;
+};
+
+const operate = function (a, op, b) {
+  if (op === '+') {
+    add(a, b);
   }
-});
+  if (op === '-') {
+    subtract(a, b);
+  }
+  if (op === '*') {
+    multiply(a, b);
+  }
+  if (op === '/') {
+    divide(a, b);
+  }
+};
+
+// buttons.addEventListener('click', (e) => {
+//   if (e.target.matches('button')) {
+//   }
+// });
 
 // Calculator logic
 // Pressing number gives input to the calculator
