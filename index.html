@@ -20,37 +20,37 @@
 
         <div>
           <div class="button-row">
-            <button class="control-key" id="CE">CE</button>
-            <button class="control-key" id="C">C</button>
-            <button class="operation" id="%">%</button>
-            <button class="operation" id="/">/</button>
+            <button data-operation="clear-last">CE</button>
+            <button data-operation="clear-all">C</button>
+            <button data-operation="percentage">%</button>
+            <button class="operation" data-operation="divide">/</button>
           </div>
 
           <div class="button-row">
-            <button class="number" id="7" value="7">7</button>
-            <button class="number" id="8" value="8">8</button>
-            <button class="number" id="9" value="9">9</button>
-            <button class="operation" id="x">X</button>
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button class="operation" data-operation="multiply">&times;</button>
           </div>
 
           <div class="button-row">
-            <button class="number" id="4" value="4">4</button>
-            <button class="number" id="5" value="5">5</button>
-            <button class="number" id="6" value="6">6</button>
-            <button class="operation" id="-">-</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button class="operation" data-operation="subtract">-</button>
           </div>
 
           <div class="button-row">
-            <button class="number" id="one  " value="1">1</button>
-            <button class="number" id="2" value="2">2</button>
-            <button class="number" id="3" value="3">3</button>
-            <button class="operation" id="+">+</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button class="operation" data-operation="add">+</button>
           </div>
 
           <div class="button-row">
-            <button class="number" id="0">0</button>
-            <button class="decimal-point" id=".">.</button>
-            <button class="equal" id="=">=</button>
+            <button>0</button>
+            <button class="operation" data-operation="decimal">.</button>
+            <button data-operation="equal" class="equal">=</button>
           </div>
         </div>
       </div>

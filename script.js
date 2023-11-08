@@ -1,21 +1,49 @@
 'use strict';
 
-const display = document.querySelector('.calc-display');
 const buttons = document.querySelectorAll('button');
 const numberButtons = document.querySelector('.number');
 const operationButtons = document.querySelector('.operation');
 const calculator = document.querySelector('.calc');
-const operand = document.querySelector('#operand');
 
 let firstNumber;
 let secondNumber;
 let operator;
 
 buttons.forEach((el) =>
-  el.addEventListener('click', function () {
-    operand.textContent += el.textContent;
+  el.addEventListener('click', function (e) {
+    const button = e.target;
+    const operation = e.target.dataset.operation;
+    const buttonContent = button.textContent;
+    operand.textContent += buttonContent;
     firstNumber = +operand.textContent;
-    console.log(firstNumber);
+    if (!operation) {
+      console.log('number key');
+    }
+
+    if (
+      operation === 'add' ||
+      operation === 'subtract' ||
+      operation === 'multiply' ||
+      operation === 'divide' ||
+      operation === 'percentage'
+    ) {
+      console.log('Operation key');
+    }
+
+    if (operation === 'decimal') {
+      console.log('decimal');
+    }
+
+    if (operation === 'clear-last') {
+      console.log('clear last');
+    }
+    if (operation === 'clear-all') {
+      console.log('clear all');
+    }
+
+    if (operation === 'equal') {
+      console.log('equal');
+    }
   })
 );
 
