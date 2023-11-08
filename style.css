@@ -16,10 +16,27 @@
 }
 
 .display {
-  padding: 15px;
+  background-color: rgba(245, 237, 237, 0.75);
   display: flex;
-  align-items: stretch;
-  justify-content: stretch;
+  align-items: flex-end;
+  justify-content: space-around;
+  flex-direction: column;
+  padding: 15px;
+  word-break: break-word;
+  border-radius: 8px;
+}
+
+#operand {
+  display: flex;
+  align-items: flex-start;
+  font-size: 1.5rem;
+  text-align: left;
+  font-style: italic;
+  padding-bottom: 10px;
+}
+
+#result {
+  font-size: 2.5rem;
 }
 
 input {
@@ -32,10 +49,13 @@ input {
 }
 
 .calc {
+  display: flex;
+  flex-direction: column;
   width: 250px;
   border: solid;
   border-radius: 10px;
   background-color: #000033;
+  padding: 10px;
 }
 
 button {

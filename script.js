@@ -1,19 +1,23 @@
 'use strict';
 
-const display = document.querySelector('input');
+const display = document.querySelector('.calc-display');
 const buttons = document.querySelectorAll('button');
 const numberButtons = document.querySelector('.number');
 const operationButtons = document.querySelector('.operation');
 const calculator = document.querySelector('.calc');
+const operand = document.querySelector('#operand');
 
 let firstNumber;
 let secondNumber;
 let operator;
 
-console.log(buttons);
-buttons.forEach((el) => el.addEventListener('click', function () {
-  firstNumber = 
-}));
+buttons.forEach((el) =>
+  el.addEventListener('click', function () {
+    operand.textContent += el.textContent;
+    firstNumber = +operand.textContent;
+    console.log(firstNumber);
+  })
+);
 
 const add = function (a, b) {
   return a + b;
