@@ -14,10 +14,16 @@ buttons.forEach((el) =>
     const button = e.target;
     const operation = e.target.dataset.operation;
     const buttonContent = button.textContent;
-    operand.textContent += buttonContent;
-    firstNumber = +operand.textContent;
+    const previousButton = calculator.dataset.previousButton;
+
     if (!operation) {
       console.log('number key');
+      if (result.textContent === '0' || previousButton === 'operator') {
+        result.textContent = buttonContent;
+        calculator.dataset.previousButton = 'number';
+      } else {
+        result.textContent += buttonContent;
+      }
     }
 
     if (
@@ -27,11 +33,25 @@ buttons.forEach((el) =>
       operation === 'divide' ||
       operation === 'percentage'
     ) {
-      console.log('Operation key');
-    }
+      const operator = calculator.dataset.operation;
+      operand.textContent += result.textContent + button.textContent;
 
+      calculator.dataset.previousButton = 'operator';
+      firstNumber = result.textContent;
+      calculator.dataset.operation = operation;
+      secondNumber = result.textContent;
+
+      operand.textContent = `${firstNumber}${buttonContent}`;
+      if (firstNumber && operator) {
+        result.textContent = operate(firstNumber, operator, secondNumber);
+        operand.textContent = result.textContent + button.textContent;
+      }
+    }
     if (operation === 'decimal') {
       console.log('decimal');
+      if (!result.textContent.includes('.')) {
+        result.textContent += buttonContent;
+      }
     }
 
     if (operation === 'clear-last') {
@@ -42,40 +62,44 @@ buttons.forEach((el) =>
     }
 
     if (operation === 'equal') {
-      console.log('equal');
+      const operator = calculator.dataset.operation;
+      secondNumber = result.textContent;
+      operand.textContent += result.textContent + button.textContent;
+
+      result.textContent = operate(firstNumber, operator, secondNumber);
     }
   })
 );
 
 const add = function (a, b) {
-  return a + b;
+  return parseFloat(a) + parseFloat(b);
 };
 
 const subtract = function (a, b) {
-  return a - b;
+  return parseFloat(a) - parseFloat(b);
 };
 
 const multiply = function (a, b) {
-  return a * b;
+  return parseFloat(a) * parseFloat(b);
 };
 
 const divide = function (a, b) {
   if (b === 0) return `You can't divide by 0!`;
-  else return a / b;
+  else return parseFloat(a) / parseFloat(b);
 };
 
 const operate = function (a, op, b) {
-  if (op === '+') {
-    add(a, b);
+  if (op === 'add') {
+    return add(a, b);
   }
-  if (op === '-') {
-    subtract(a, b);
+  if (op === 'subtract') {
+    return subtract(a, b);
   }
-  if (op === '*') {
-    multiply(a, b);
+  if (op === 'multiply') {
+    return multiply(a, b);
   }
-  if (op === '/') {
-    divide(a, b);
+  if (op === 'divide') {
+    return divide(a, b);
   }
 };
 
