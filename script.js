@@ -18,12 +18,16 @@ buttons.forEach((el) =>
 
     if (!operation) {
       console.log('number key');
-      if (result.textContent === '0' || previousButton === 'operator') {
+      if (
+        result.textContent === '0' ||
+        previousButton === 'operator' ||
+        previousButton === 'equal'
+      ) {
         result.textContent = buttonContent;
-        calculator.dataset.previousButton = 'number';
       } else {
         result.textContent += buttonContent;
       }
+      calculator.dataset.previousButton = 'number';
     }
 
     if (
@@ -37,21 +41,41 @@ buttons.forEach((el) =>
       operand.textContent += result.textContent + button.textContent;
 
       calculator.dataset.previousButton = 'operator';
-      firstNumber = result.textContent;
+      calculator.dataset.firstNumber = result.textContent;
+
+      firstNumber = calculator.dataset.firstNumber;
+
       calculator.dataset.operation = operation;
       secondNumber = result.textContent;
 
-      operand.textContent = `${firstNumber}${buttonContent}`;
-      if (firstNumber && operator) {
-        result.textContent = operate(firstNumber, operator, secondNumber);
+      if (
+        firstNumber &&
+        operator &&
+        previousButton !== 'operator' &&
+        previousButton !== 'equal'
+      ) {
+        const calcValue = operate(firstNumber, operator, secondNumber);
+        result.textContent = calcValue;
+        calculator.dataset.firstNumber = calcValue;
         operand.textContent = result.textContent + button.textContent;
+      } else {
+        calculator.dataset.firstNumber = result.textContent;
       }
+
+      operand.textContent = `${firstNumber}${buttonContent}`;
     }
     if (operation === 'decimal') {
       console.log('decimal');
       if (!result.textContent.includes('.')) {
-        result.textContent += buttonContent;
+        if (previousButton === 'operator' || previousButton === 'equal') {
+          result.textContent = '0.';
+        } else {
+          result.textContent += buttonContent;
+        }
+      } else if (previousButton === 'operator' || previousButton === 'equal') {
+        result.textContent = '0.';
       }
+      calculator.dataset.previousButton = 'decimal';
     }
 
     if (operation === 'clear-last') {
@@ -62,11 +86,21 @@ buttons.forEach((el) =>
     }
 
     if (operation === 'equal') {
+      firstNumber = calculator.dataset.firstNumber;
       const operator = calculator.dataset.operation;
       secondNumber = result.textContent;
-      operand.textContent += result.textContent + button.textContent;
 
-      result.textContent = operate(firstNumber, operator, secondNumber);
+      if (firstNumber) {
+        if (calculator.dataset.previousButton === 'equal') {
+          firstNumber = result.textContent;
+          secondNumber = calculator.dataset.modValue;
+        }
+        operand.textContent += result.textContent + button.textContent;
+        result.textContent = operate(firstNumber, operator, secondNumber);
+      }
+
+      calculator.dataset.modValue = secondNumber;
+      calculator.dataset.previousButton = 'equal';
     }
   })
 );
