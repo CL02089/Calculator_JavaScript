@@ -34,8 +34,7 @@ buttons.forEach((el) =>
       operation === 'add' ||
       operation === 'subtract' ||
       operation === 'multiply' ||
-      operation === 'divide' ||
-      operation === 'percentage'
+      operation === 'divide'
     ) {
       const operator = calculator.dataset.operation;
       operand.textContent += result.textContent + button.textContent;
@@ -78,11 +77,22 @@ buttons.forEach((el) =>
       calculator.dataset.previousButton = 'decimal';
     }
 
-    if (operation === 'clear-last') {
-      console.log('clear last');
+    if (operation === 'clear-entry') {
+      result.textContent = '0';
+      calculator.dataset.previousButton = 'clear-entry';
     }
     if (operation === 'clear-all') {
-      console.log('clear all');
+      calculator.dataset.firstNumber = '';
+      calculator.dataset.secondNumber = '';
+      calculator.dataset.modValue = '';
+      calculator.dataset.operation = '';
+      calculator.dataset.previousButton = '';
+
+      console.log(firstNumber);
+
+      result.textContent = '0';
+      operand.textContent = '';
+      calculator.dataset.previousButton = 'clear-all';
     }
 
     if (operation === 'equal') {
@@ -101,6 +111,10 @@ buttons.forEach((el) =>
 
       calculator.dataset.modValue = secondNumber;
       calculator.dataset.previousButton = 'equal';
+    }
+
+    if (operation === 'percentage') {
+      result.textContent = parseFloat(result.textContent) / 100;
     }
   })
 );
