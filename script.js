@@ -74,7 +74,7 @@ buttons.forEach((el) => {
     }
 
     if (operation === 'clear-entry') {
-      result.textContent = '';
+      result.textContent = '0';
       calculator.dataset.previousButton = 'clear-entry';
     }
 
