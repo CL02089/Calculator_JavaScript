@@ -66,7 +66,7 @@ buttons.forEach((el) => {
       if (!result.textContent.includes('.')) {
         result.textContent += '.';
       }
-      if (previousButton === 'operator') {
+      if (previousButton === 'operator' || previousButton === 'equal') {
         result.textContent = '0.';
       }
 
@@ -79,7 +79,13 @@ buttons.forEach((el) => {
     }
 
     if (operation === 'clear-all') {
-      console.log('clear-all');
+      calculator.dataset.firstNumber = '';
+      calculator.dataset.operation = '';
+      calculator.dataset.secondNumber = '';
+      calculator.dataset.modValue = '';
+      calculator.dataset.previousButton = '';
+      result.textContent = 0;
+      operationDisplay.textContent = '';
       calculator.dataset.previousButton = 'clear-all';
     }
 
@@ -120,7 +126,7 @@ const multiply = function (a, b) {
 };
 
 const divide = function (a, b) {
-  if (b === 0) return `You can't divide by 0!`;
+  if (b == 0) return `You can't divide by 0!`;
   else return parseFloat(a) / parseFloat(b);
 };
 
