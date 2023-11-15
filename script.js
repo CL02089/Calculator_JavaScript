@@ -4,12 +4,14 @@ const buttons = document.querySelectorAll('button');
 const numberButtons = document.querySelector('.number');
 const operationButtons = document.querySelector('.operation');
 const calculator = document.querySelector('.calc');
+const result = document.querySelector('#result');
+const operationDisplay = document.querySelector('#op-display');
 
 let firstNumber;
 let secondNumber;
 let operator;
 
-buttons.forEach((el) =>
+buttons.forEach((el) => {
   el.addEventListener('click', function (e) {
     const button = e.target;
     const operation = e.target.dataset.operation;
@@ -17,7 +19,6 @@ buttons.forEach((el) =>
     const previousButton = calculator.dataset.previousButton;
 
     if (!operation) {
-      console.log('number key');
       if (
         result.textContent === '0' ||
         previousButton === 'operator' ||
@@ -27,6 +28,7 @@ buttons.forEach((el) =>
       } else {
         result.textContent += buttonContent;
       }
+
       calculator.dataset.previousButton = 'number';
     }
 
@@ -36,88 +38,45 @@ buttons.forEach((el) =>
       operation === 'multiply' ||
       operation === 'divide'
     ) {
-      const operator = calculator.dataset.operation;
-      operand.textContent += result.textContent + button.textContent;
-
+      operator = calculator.dataset.operation;
       calculator.dataset.previousButton = 'operator';
       calculator.dataset.firstNumber = result.textContent;
 
       firstNumber = calculator.dataset.firstNumber;
 
       calculator.dataset.operation = operation;
-      secondNumber = result.textContent;
-
-      if (
-        firstNumber &&
-        operator &&
-        previousButton !== 'operator' &&
-        previousButton !== 'equal'
-      ) {
-        const calcValue = operate(firstNumber, operator, secondNumber);
-        result.textContent = calcValue;
-        calculator.dataset.firstNumber = calcValue;
-        operand.textContent = result.textContent + button.textContent;
-      } else {
-        calculator.dataset.firstNumber = result.textContent;
-      }
-
-      operand.textContent = `${firstNumber}${buttonContent}`;
     }
+
     if (operation === 'decimal') {
-      console.log('decimal');
       if (!result.textContent.includes('.')) {
-        if (previousButton === 'operator' || previousButton === 'equal') {
-          result.textContent = '0.';
-        } else {
-          result.textContent += buttonContent;
-        }
-      } else if (previousButton === 'operator' || previousButton === 'equal') {
+        result.textContent += '.';
+      }
+      if (previousButton === 'operator') {
         result.textContent = '0.';
       }
-      calculator.dataset.previousButton = 'decimal';
     }
 
     if (operation === 'clear-entry') {
-      result.textContent = '0';
-      calculator.dataset.previousButton = 'clear-entry';
+      result.textContent = '';
     }
+
     if (operation === 'clear-all') {
-      calculator.dataset.firstNumber = '';
-      calculator.dataset.secondNumber = '';
-      calculator.dataset.modValue = '';
-      calculator.dataset.operation = '';
-      calculator.dataset.previousButton = '';
-
-      console.log(firstNumber);
-
-      result.textContent = '0';
-      operand.textContent = '';
-      calculator.dataset.previousButton = 'clear-all';
-    }
-
-    if (operation === 'equal') {
-      firstNumber = calculator.dataset.firstNumber;
-      const operator = calculator.dataset.operation;
-      secondNumber = result.textContent;
-
-      if (firstNumber) {
-        if (calculator.dataset.previousButton === 'equal') {
-          firstNumber = result.textContent;
-          secondNumber = calculator.dataset.modValue;
-        }
-        operand.textContent += result.textContent + button.textContent;
-        result.textContent = operate(firstNumber, operator, secondNumber);
-      }
-
-      calculator.dataset.modValue = secondNumber;
-      calculator.dataset.previousButton = 'equal';
+      console.log('clear-all');
     }
 
     if (operation === 'percentage') {
       result.textContent = parseFloat(result.textContent) / 100;
     }
-  })
-);
+
+    if (operation === 'equal') {
+      firstNumber = calculator.dataset.firstNumber;
+      operator = calculator.dataset.operation;
+      secondNumber = result.textContent;
+
+      result.textContent = operate(firstNumber, operator, secondNumber);
+    }
+  });
+});
 
 const add = function (a, b) {
   return parseFloat(a) + parseFloat(b);
@@ -150,24 +109,3 @@ const operate = function (a, op, b) {
     return divide(a, b);
   }
 };
-
-// buttons.addEventListener('click', (e) => {
-//   if (e.target.matches('button')) {
-//   }
-// });
-
-// Calculator logic
-// Pressing number gives input to the calculator
-// Until pressing an operator button or C, CE pushing the pressed number to the end of the number
-// When push C or CE clear the entered number
-// Recognize the pressed operator button, and waited for the next number
-// Until press the next operator, or equal sign or C, CE push the pressed number to the end of the number
-// When push CE clear the last number
-// When push C clear the whole operation
-// When press equal submit operation and
-
-// Display
-// When pressing number show it on display
-// Until pressing an operator button or C, CE pushing the pressed number to the end of the number
-// When operation button pressed clear the display
-// When press equal sign show the result
