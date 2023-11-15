@@ -38,13 +38,28 @@ buttons.forEach((el) => {
       operation === 'multiply' ||
       operation === 'divide'
     ) {
-      operator = calculator.dataset.operation;
+      const operator = calculator.dataset.operation;
+      operationDisplay.textContent += result.textContent + button.textContent;
+
       calculator.dataset.previousButton = 'operator';
-      calculator.dataset.firstNumber = result.textContent;
 
       firstNumber = calculator.dataset.firstNumber;
-
       calculator.dataset.operation = operation;
+      secondNumber = result.textContent;
+
+      if (
+        firstNumber &&
+        operator &&
+        previousButton !== 'operator' &&
+        previousButton !== 'equal'
+      ) {
+        const calcValue = operate(firstNumber, operator, secondNumber);
+        result.textContent = calcValue;
+        calculator.dataset.firstNumber = calcValue;
+        operationDisplay.textContent = result.textContent + button.textContent;
+      } else {
+        calculator.dataset.firstNumber = result.textContent;
+      }
     }
 
     if (operation === 'decimal') {
@@ -54,18 +69,23 @@ buttons.forEach((el) => {
       if (previousButton === 'operator') {
         result.textContent = '0.';
       }
+
+      calculator.dataset.previousButton = 'decimal';
     }
 
     if (operation === 'clear-entry') {
       result.textContent = '';
+      calculator.dataset.previousButton = 'clear-entry';
     }
 
     if (operation === 'clear-all') {
       console.log('clear-all');
+      calculator.dataset.previousButton = 'clear-all';
     }
 
     if (operation === 'percentage') {
       result.textContent = parseFloat(result.textContent) / 100;
+      calculator.dataset.previousButton = 'percentage';
     }
 
     if (operation === 'equal') {
@@ -73,7 +93,16 @@ buttons.forEach((el) => {
       operator = calculator.dataset.operation;
       secondNumber = result.textContent;
 
-      result.textContent = operate(firstNumber, operator, secondNumber);
+      if (firstNumber) {
+        if (previousButton === 'equal') {
+          firstNumber = result.textContent;
+          secondNumber = calculator.dataset.modValue;
+        }
+        operationDisplay.textContent += result.textContent + buttonContent;
+        result.textContent = operate(firstNumber, operator, secondNumber);
+      }
+      calculator.dataset.modValue = secondNumber;
+      calculator.dataset.previousButton = 'equal';
     }
   });
 });
