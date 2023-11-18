@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Roboto:wght@100;400&display=swap');
 
 body {
-  background-color: lightblue;
+  background-color: #7fdbff;
 }
 
 .container {
@@ -17,6 +17,9 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
+  font-size: 30px;
+  -webkit-text-stroke: 2px black;
+  color: #777777;
 }
 
 .display {

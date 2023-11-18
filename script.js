@@ -116,43 +116,7 @@ const clickHandler = function (e) {
   }
 };
 
-const add = function (a, b) {
-  return parseFloat(a) + parseFloat(b);
-};
-
-const subtract = function (a, b) {
-  return parseFloat(a) - parseFloat(b);
-};
-
-const multiply = function (a, b) {
-  return parseFloat(a) * parseFloat(b);
-};
-
-const divide = function (a, b) {
-  if (b == 0) return `You can't divide by 0!`;
-  else return parseFloat(a) / parseFloat(b);
-};
-
-const operate = function (a, op, b) {
-  if (op === 'add') {
-    return add(a, b);
-  }
-  if (op === 'subtract') {
-    return subtract(a, b);
-  }
-  if (op === 'multiply') {
-    return multiply(a, b);
-  }
-  if (op === 'divide') {
-    return divide(a, b);
-  }
-};
-
-buttons.forEach((el) => {
-  el.addEventListener('click', clickHandler);
-});
-
-window.addEventListener('keydown', function (e) {
+const keyboardHandler = function (e) {
   e.preventDefault();
   const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   const previousButton = calculator.dataset.previousButton;
@@ -182,6 +146,9 @@ window.addEventListener('keydown', function (e) {
   }
   if (e.key === 'Enter') {
     operation = 'equal';
+  }
+  if (e.key === 'Delete') {
+    operation = 'clear-all';
   }
 
   if (!operation && numbers.includes(e.key)) {
@@ -281,4 +248,42 @@ window.addEventListener('keydown', function (e) {
     calculator.dataset.modValue = secondNumber;
     calculator.dataset.previousButton = 'equal';
   }
+};
+
+const add = function (a, b) {
+  return parseFloat(a) + parseFloat(b);
+};
+
+const subtract = function (a, b) {
+  return parseFloat(a) - parseFloat(b);
+};
+
+const multiply = function (a, b) {
+  return parseFloat(a) * parseFloat(b);
+};
+
+const divide = function (a, b) {
+  if (b == 0) return `You can't divide by 0!`;
+  else return parseFloat(a) / parseFloat(b);
+};
+
+const operate = function (a, op, b) {
+  if (op === 'add') {
+    return add(a, b);
+  }
+  if (op === 'subtract') {
+    return subtract(a, b);
+  }
+  if (op === 'multiply') {
+    return multiply(a, b);
+  }
+  if (op === 'divide') {
+    return divide(a, b);
+  }
+};
+
+buttons.forEach((el) => {
+  el.addEventListener('click', clickHandler);
 });
+
+window.addEventListener('keydown', keyboardHandler);
