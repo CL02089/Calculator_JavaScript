@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Roboto:wght@100;400&display=swap');
 
 body {
-  background-color: #7fdbff;
+  background-color: lightcyan;
 }
 
 .container {
@@ -19,7 +19,7 @@ body {
   text-align: center;
   font-size: 30px;
   -webkit-text-stroke: 2px black;
-  color: #777777;
+  color: #777672;
 }
 
 .display {
@@ -60,6 +60,8 @@ input {
   flex-direction: column;
   width: 280px;
   border: solid;
+  border-width: 2px;
+  border-color: aliceblue;
   border-radius: 10px;
   background-color: #000033;
   padding: 10px;
@@ -76,7 +78,7 @@ button {
   justify-content: center;
   border-color: #e6e6ff;
   border-radius: 8px;
-  background-color: #19194d;
+  background-color: #777672;
   color: #e6e6ff;
 }
 
@@ -93,10 +95,20 @@ button {
 
 .equal {
   width: 125px;
-  background-color: orange;
+  background-color: #f1e079;
+  font-size: 25px;
+  color: #020708;
+}
+
+.operation {
+  background-color: #f1e079;
+  font-size: 25px;
+  color: whitesmoke;
+  color: #020708;
 }
 
 .clear-entry,
 .clear-all {
-  background-color: gray;
+  background-color: #e9e9e9;
+  color: #020708;
 }
